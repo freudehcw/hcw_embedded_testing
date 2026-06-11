@@ -1,0 +1,21 @@
+---
+# CMock configuration for the theremin project.
+# Generates mock_hal_gpio.* and mock_hal_time.* from the HAL headers.
+:cmock:
+  :mock_prefix: mock_
+  :when_no_prototypes: :warn
+  :verbosity: 1
+  :treat_externs: :exclude
+  :includes:
+    - hal_gpio.h
+    - hal_time.h
+  :plugins:
+    - :ignore          # allow xxx_Ignore() to skip a function entirely
+    - :ignore_arg      # allow ignoring individual arguments
+    - :expect_any_args # allow xxx_ExpectAnyArgs()
+    - :return_thru_ptr # write back through pointer args
+  :treat_as:
+    uint32_t: HEX32
+    uint64_t: HEX64
+    gpio_level_t: INT
+    gpio_dir_t: INT
